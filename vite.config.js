@@ -11,7 +11,14 @@ export default defineConfig({
     }
   },
   plugins: [
-    vituum(),
+    vituum({
+      imports: {
+        filenamePattern: {
+          '+.css': [],
+          '+.scss': ['src/styles']
+        }
+      }
+    }),
     liquidjs({
       root: 'src'
     }),
