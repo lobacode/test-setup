@@ -1,0 +1,22 @@
+{
+  "sidebar": {
+    "items": [
+      {
+        "title": "Sidebar Item 1",
+        "link": "#"
+      },
+      {
+        "title": "Sidebar Item 2",
+        "link": "#"
+      },
+      {
+        "title": "Sidebar Item 3",
+        "link": "#"
+      },
+      {
+        "title": "Sidebar Item 4",
+        "link": "#"
+      }
+    ]
+  }
+}

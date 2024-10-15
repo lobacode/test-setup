@@ -1,0 +1,7 @@
+<div id="sidebar">
+  <ul>
+    {% for item in sidebar.items %}
+      <li><a href="{{ item.link }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

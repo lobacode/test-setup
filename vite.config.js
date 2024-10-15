@@ -21,9 +21,10 @@ export default defineConfig({
       output: {
         assetFileNames: (chunkInfo) => {
           let outDir = '';
+          let filename = chunkInfo.names && chunkInfo.names[0];
 
           // Fonts
-          if (/(ttf|woff|woff2|eot)$/.test(chunkInfo.name)) {
+          if (/(ttf|woff|woff2|eot)$/.test(filename)) {
             outDir = 'fonts';
           }
 
@@ -33,30 +34,30 @@ export default defineConfig({
           }
 
           // Images
-          if (/(png|jpg|jpeg|gif|webp)$/.test(chunkInfo.name)) {
+          if (/(png|jpg|jpeg|gif|webp)$/.test(filename)) {
             outDir = 'images';
           }
 
           // Media
-          if (/(mp3|mp4|webm|ogg|wav|flac|aac)$/.test(chunkInfo.name)) {
+          if (/(mp3|mp4|webm|ogg|wav|flac|aac)$/.test(filename)) {
             outDir += 'media';
           }
 
           // JSON
-          if (/json$/.test(chunkInfo.name)) {
+          if (/json$/.test(filename)) {
             outDir = 'json';
           }
 
           // JS
-          if (/js$/.test(chunkInfo.name)) {
+          if (/js$/.test(filename)) {
             outDir = 'js';
           }
 
           // CSS
-          if (/css$/.test(chunkInfo.name)) {
+          if (/css$/.test(filename)) {
             outDir = 'css';
           }
-
+          
           return `${outDir}/[name][extname]`;
         },
         chunkFileNames: 'js/[name]-[hash].js',
