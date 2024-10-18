@@ -6,21 +6,17 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler'
+        api: 'modern-compiler',
       }
     }
   },
   plugins: [
     vituum({
-      imports: {
-        filenamePattern: {
-          '+.css': [],
-          '+.scss': ['src/styles']
-        }
-      }
+      // Disable sass input
+      input: [],
     }),
     liquidjs({
-      root: 'src'
+      root: 'src',
     }),
   ],
   build: {
@@ -65,7 +61,7 @@ export default defineConfig({
             outDir = 'css';
           }
           
-          return `${outDir}/[name][extname]`;
+          return `${outDir}/[name]-[hash][extname]`;
         },
         chunkFileNames: 'js/[name]-[hash].js',
         entryFileNames: 'js/[name]-[hash].js',
