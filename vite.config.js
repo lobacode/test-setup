@@ -4,10 +4,6 @@ import liquidjs from '@vituum/vite-plugin-liquid';
 import path from 'node:path';
 
 export default defineConfig({
-  alias: {
-    '~': path.resolve(__dirname, './node_modules'),
-    '@': `${path.resolve(__dirname, './src')}`,
-  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -33,14 +29,15 @@ export default defineConfig({
         assetFileNames: (chunkInfo) => {
           let outDir = '';
           let filename = chunkInfo.names && chunkInfo.names[0];
-          console.log(filename);
+          let originalFilename = chunkInfo.originalFileNames && chunkInfo.originalFileNames[0];
+          
           // Fonts
           if (/(ttf|woff|woff2|eot)$/.test(filename)) {
             outDir = 'fonts';
           }
 
           // SVG
-          if (/svg$/.test(chunkInfo.name)) {
+          if (/svg$/.test(filename)) {
             outDir = 'svg';
           }
 
@@ -66,10 +63,18 @@ export default defineConfig({
 
           // CSS
           if (/css$/.test(filename)) {
-            outDir = 'css';
+            if ((/^src\/libs/.test(originalFilename))) {
+              console.log(originalFilename);
+              outDir = originalFilename
+                        .replace(/^src\/libs/, 'libs')
+                        .replace(/scss.*\.scss$/, 'css');
+
+            } else {
+              outDir = 'css';
+            }
           }
           
-          return `${outDir}/[name]-[hash][extname]`;
+          return `${outDir}/[name][extname]`;
         },
         chunkFileNames: 'js/[name]-[hash].js',
         entryFileNames: 'js/[name]-[hash].js',
