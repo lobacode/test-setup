@@ -1,7 +1,7 @@
-<div id="sidebar">
+<div class="w-20">
   <ul>
     {% for item in sidebar.items %}
-      <li><a href="{{ item.link }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.link }}"><i class="fa fa-solid fa-user"></i>{{ item.title }}</a></li>
     {% endfor %}
   </ul>
 </div>

@@ -1,8 +1,13 @@
 import { defineConfig } from "vite";
 import vituum from 'vituum';
 import liquidjs from '@vituum/vite-plugin-liquid';
+import path from 'node:path';
 
 export default defineConfig({
+  alias: {
+    '~': path.resolve(__dirname, './node_modules'),
+    '@': `${path.resolve(__dirname, './src')}`,
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -12,8 +17,11 @@ export default defineConfig({
   },
   plugins: [
     vituum({
-      // Disable sass input
-      input: [],
+      // Disable sass input on build
+      input: [
+        './src/styles/*.scss',
+        './src/libs/**/scss/*.scss',
+      ],
     }),
     liquidjs({
       root: 'src',
@@ -25,7 +33,7 @@ export default defineConfig({
         assetFileNames: (chunkInfo) => {
           let outDir = '';
           let filename = chunkInfo.names && chunkInfo.names[0];
-
+          console.log(filename);
           // Fonts
           if (/(ttf|woff|woff2|eot)$/.test(filename)) {
             outDir = 'fonts';

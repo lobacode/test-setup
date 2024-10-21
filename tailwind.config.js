@@ -4,6 +4,11 @@ module.exports = {
     './src/**/*.{scss,liquid,js}'
   ],
   theme: {
+    fontFamily: {
+      sans: [
+        '"Poppins", sans-serif',
+      ],
+    },
     extend: {},
   },
   plugins: [],
